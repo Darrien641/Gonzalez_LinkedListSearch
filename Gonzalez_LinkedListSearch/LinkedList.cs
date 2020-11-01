@@ -68,10 +68,10 @@ namespace Gonzalez_LinkedListSearch
             return sb.ToString();
         }
 
-        public Node search(string name)
+        public Node Search(string name)
         {
-            // stopwatch to time search function
-            //search from back and front
+            // stopwatch to time Search function
+            //Search from back and front
             Node current = head;
             
             while (current != null)
@@ -91,16 +91,17 @@ namespace Gonzalez_LinkedListSearch
         }
         public Node PopSearch()
         {
-            //Node temp;
+            
             Node current = head;
             while (current != null)
             {
+                Node temp = current.Next;
                 if (current == null)
                 {
                     return null;
                 }
                 
-                if (current.MData.GetRank() > current.Next.MData.GetRank())
+                if (current.MData.GetRank() > temp.MData.GetRank())
                 {
                     return current;
                 }
