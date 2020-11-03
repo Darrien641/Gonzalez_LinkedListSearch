@@ -64,12 +64,24 @@ namespace Gonzalez_LinkedListSearch
                 }
                 if (Input == "5")
                 {
-                    Console.WriteLine();
+                    Console.WriteLine("Please ");
                 }
                 if (Input == "6")
-                { }
+                {
+                    tempNode = DLL.PopSearch('M');
+                    Console.WriteLine($"Search result: \n" +
+                        $"Name: {tempNode.MData.GetName()}" +
+                        $" Gender: {tempNode.MData.GetGender()}" +
+                        $" Popularity: {tempNode.MData.GetRank()}");
+                }
                 if (Input == "7")
-                { }
+                {
+                    tempNode = DLL.PopSearch('F');
+                    Console.WriteLine($"Search result: \n" +
+                        $"Name: {tempNode.MData.GetName()}" +
+                        $" Gender: {tempNode.MData.GetGender()}" +
+                        $" Popularity: {tempNode.MData.GetRank()}");
+                }
                 if (Input == "8")
                 { }
                 //break;

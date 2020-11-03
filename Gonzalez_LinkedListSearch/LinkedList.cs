@@ -28,6 +28,8 @@ namespace Gonzalez_LinkedListSearch
             while (current != null)
             {
                 Node next = current.Next;
+                string CurrentNodeName = current.MData.GetName();
+                string InMDataName = mdata.GetName();
                 if (next == null)
                 {
                     tail.Next = new Node(mdata);
@@ -35,14 +37,14 @@ namespace Gonzalez_LinkedListSearch
                     tail = tail.Next;
                     return tail;
                 }
-                if (current.MData.GetName().CompareTo(mdata.GetName()) > 0)
+                if (CurrentNodeName.CompareTo(InMDataName) > 0)
                 {
                     Node temp = new Node(mdata);
                     temp.Next = head;
                     head = temp;
                     return temp;
                 }
-                if (current.MData.GetName().CompareTo(mdata.GetName()) < 0 && current.MData.GetName().CompareTo(mdata.GetName()) >= 0)
+                if (CurrentNodeName.CompareTo(InMDataName) < 0 && CurrentNodeName.CompareTo(InMDataName) >= 0)
                 {
                     current.Next = new Node(mdata);
                     current.Next.Prev = current;
@@ -58,11 +60,13 @@ namespace Gonzalez_LinkedListSearch
         public string Print()
         {
             Node current = head;
+            MetaData tempMdata = current.MData;
             StringBuilder sb = new StringBuilder();
             while (current != null)
             {
-                sb.Append($"{current.MData.GetName()}, " +
-                    $"{current.MData.GetGender()}, {current.MData.GetRank()}\n");
+                sb.Append($"{tempMdata.GetName()}, " +
+                    $"{tempMdata.GetGender()}, " +
+                    $"{tempMdata.GetRank()}\n");
                 current = current.Next;
             }
             return sb.ToString();
@@ -73,14 +77,14 @@ namespace Gonzalez_LinkedListSearch
             // stopwatch to time Search function
             //Search from back and front
             Node current = head;
-            
+            string currentName = current.MData.GetName();
             while (current != null)
             {
                 if (current == null)
                 {
                     return null;
                 }
-                if (current.MData.GetName().ToLower().CompareTo(name.ToLower()) == 0)
+                if (currentName.ToLower().CompareTo(name.ToLower()) == 0)
                 {
 
                     return current;
@@ -89,21 +93,26 @@ namespace Gonzalez_LinkedListSearch
             }
             return null;
         }
-        public Node PopSearch()
+        public Node PopSearch(char gender)
         {
             
             Node current = head;
             while (current != null)
             {
-                Node temp = current.Next;
+                Node Next = current.Next;
                 if (current == null)
                 {
                     return null;
                 }
-                
-                if (current.MData.GetRank() > temp.MData.GetRank())
+
+                if ((current.MData.GetGender() == 'M') && (current.MData.GetRank() > Next.MData.GetRank()))
                 {
                     return current;
+                }
+                else if ((tail.MData.GetGender() == 'F') && (tail.MData.GetRank() < tail.Prev.MData.GetRank())) 
+                {
+                    tail = tail.Prev;
+                    return tail;
                 }
                 current = current.Next;
             }
