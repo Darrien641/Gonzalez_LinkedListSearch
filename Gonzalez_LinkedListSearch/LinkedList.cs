@@ -28,8 +28,7 @@ namespace Gonzalez_LinkedListSearch
             while (current != null)
             {
                 Node next = current.Next;
-                string CurrentNodeName = current.MData.GetName();
-                string InMDataName = mdata.GetName();
+
                 if (next == null)
                 {
                     tail.Next = new Node(mdata);
@@ -37,14 +36,14 @@ namespace Gonzalez_LinkedListSearch
                     tail = tail.Next;
                     return tail;
                 }
-                if (CurrentNodeName.CompareTo(InMDataName) > 0)
+                if (current.MData.GetName().CompareTo(mdata.GetName()) > 0)
                 {
                     Node temp = new Node(mdata);
                     temp.Next = head;
                     head = temp;
                     return temp;
                 }
-                if (CurrentNodeName.CompareTo(InMDataName) < 0 && CurrentNodeName.CompareTo(InMDataName) >= 0)
+                if (current.MData.GetName().CompareTo(mdata.GetName()) < 0 && current.MData.GetName().CompareTo(mdata.GetName()) >= 0)
                 {
                     current.Next = new Node(mdata);
                     current.Next.Prev = current;
@@ -60,10 +59,11 @@ namespace Gonzalez_LinkedListSearch
         public string Print()
         {
             Node current = head;
-            MetaData tempMdata = current.MData;
+            
             StringBuilder sb = new StringBuilder();
             while (current != null)
             {
+                MetaData tempMdata = current.MData;
                 sb.Append($"{tempMdata.GetName()}, " +
                     $"{tempMdata.GetGender()}, " +
                     $"{tempMdata.GetRank()}\n");
@@ -77,9 +77,10 @@ namespace Gonzalez_LinkedListSearch
             // stopwatch to time Search function
             //Search from back and front
             Node current = head;
-            string currentName = current.MData.GetName();
+            
             while (current != null)
             {
+                string currentName = current.MData.GetName();
                 if (current == null)
                 {
                     return null;
@@ -97,6 +98,7 @@ namespace Gonzalez_LinkedListSearch
         {
             
             Node current = head;
+            Node last = tail;
             while (current != null)
             {
                 Node Next = current.Next;
@@ -109,11 +111,12 @@ namespace Gonzalez_LinkedListSearch
                 {
                     return current;
                 }
-                else if ((tail.MData.GetGender() == 'F') && (tail.MData.GetRank() < tail.Prev.MData.GetRank())) 
+                else if ((last.MData.GetGender() != 'M') && (last.MData.GetRank() < last.Prev.MData.GetRank())) 
                 {
-                    tail = tail.Prev;
-                    return tail;
+                    
+                    return last;
                 }
+                last = tail.Prev;
                 current = current.Next;
             }
             

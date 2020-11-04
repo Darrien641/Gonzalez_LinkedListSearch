@@ -4,7 +4,7 @@ Yuhan,F,5
 Yulema,F,5
 Yuliani,F,5
 Yuma,F,5
-Yume,F,50
+Yume,F,501
 Yunalesca,F,5
 Yuriah,F,5
 Yuzuki,F,5

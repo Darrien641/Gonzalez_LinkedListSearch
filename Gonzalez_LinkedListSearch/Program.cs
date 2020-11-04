@@ -12,8 +12,12 @@ namespace Gonzalez_LinkedListSearch
         static void Main(string[] args)
         {
             string Input = "";
+            string Name = "";
+            string Gender = "";
+            string Rank = "";
             FileBoot fb = new FileBoot();           
             LinkedList DLL = fb.getList();
+            MetaData TempMData;
             ArrayList menu = new ArrayList();
             Node tempNode;
             fb.getData();
@@ -64,7 +68,14 @@ namespace Gonzalez_LinkedListSearch
                 }
                 if (Input == "5")
                 {
-                    Console.WriteLine("Please ");
+                    Console.WriteLine("Please enter the name you would like to add: ");
+                    Name = Console.ReadLine();
+                    Console.WriteLine($"Please enter the Gender of {Name}");
+                    Gender = Console.ReadLine();
+                    Console.WriteLine($"Please Enter the Rank of{Name}");
+                    Rank = Console.ReadLine();
+                    TempMData = new MetaData(Convert.ToChar(Gender.ToUpper()), Name, Convert.ToInt32(Rank));
+                    DLL.Add(TempMData);
                 }
                 if (Input == "6")
                 {
@@ -83,7 +94,9 @@ namespace Gonzalez_LinkedListSearch
                         $" Popularity: {tempNode.MData.GetRank()}");
                 }
                 if (Input == "8")
-                { }
+                {
+                   Console.WriteLine(DLL.Print());
+                }
                 //break;
             }
             //MetaData mdata = new MetaData('M', "Mark",500);
