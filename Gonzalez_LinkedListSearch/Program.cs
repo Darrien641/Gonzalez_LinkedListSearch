@@ -16,10 +16,11 @@ namespace Gonzalez_LinkedListSearch
             Stopwatch stopwatch = new Stopwatch();
             ArrayList menu = new ArrayList();
             FileBoot fb = new FileBoot();
-            fb.getData();
+            
             LinkedList DLL = fb.getList();
             MetaData TempMData;
             Node tempNode;
+            fb.getData();
             string Input = "";
             string Name = "";
             string Gender = "";
@@ -53,11 +54,14 @@ namespace Gonzalez_LinkedListSearch
                     stopwatch.Start();
                     tempNode = DLL.Search(Input);
                     stopwatch.Stop();
-                    string time = stopwatch.ElapsedMilliseconds.ToString(@"m\:ss\.ff");
-                    Console.WriteLine($"Search result in {stopwatch.}: \n" +
+                    TimeSpan time = stopwatch.Elapsed;
+                    string SearchTime = string.Format("{0:00}:{1:00}:{2:00}.{3:00}", 
+                        time.Hours,time.Minutes,time.Seconds,time.Milliseconds);
+
+                    Console.WriteLine($"Search result in time: {time} \n\n" +
                         $"Name: {tempNode.MData.GetName()}" +
                         $" Gender: {tempNode.MData.GetGender()}" +
-                        $" Popularity: {tempNode.MData.GetRank()}");
+                        $" Popularity: {tempNode.MData.GetRank()}\n");
                     
                 }
                 if (Input == "2")
