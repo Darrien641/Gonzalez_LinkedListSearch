@@ -2,7 +2,7 @@ Ytzel,F,5
 Yuan,F,5
 Yuhan,F,5
 Yulema,F,5
-Yuliani,F,5
+Yuliani,F,50
 Yuma,F,5
 Yume,F,501
 Yunalesca,F,5

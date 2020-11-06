@@ -8,7 +8,8 @@ namespace Gonzalez_LinkedListSearch
 {
     class FileBoot
     {
-        StreamReader PopDataFile = new StreamReader("yob2018.txt");
+        
+        StreamReader PopDataFile = new StreamReader("yob2019.txt");
         LinkedList ll = new LinkedList();
         string ln = "";
         string[] splitData;

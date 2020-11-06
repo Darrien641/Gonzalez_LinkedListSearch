@@ -17,25 +17,35 @@ namespace Gonzalez_LinkedListSearch
            
             if (head == null)
             {
-                //Where is it best to receive raw data for MetaData?
-                
+              
                 head = new Node(mdata);
                 tail = head;
                 return head;
             }
             Node current = head;
-            //if not empty find insertion location
+            
             while (current != null)
             {
                 Node next = current.Next;
 
                 if (next == null)
                 {
-                    tail.Next = new Node(mdata);
-                    tail.Next.Prev = tail;
-                    tail = tail.Next;
-                    return tail;
+                    if (current.MData.GetName().CompareTo(mdata.GetName()) > 0)
+                    {
+                        Node temp = new Node(mdata);
+                        temp.Next = head;
+                        head = temp;
+                        return temp;
+                    }
+                    else
+                    {
+                        tail.Next = new Node(mdata);
+                        tail.Next.Prev = tail;
+                        tail = tail.Next;
+                        return tail;
+                    }
                 }
+
                 if (current.MData.GetName().CompareTo(mdata.GetName()) > 0)
                 {
                     Node temp = new Node(mdata);
@@ -43,7 +53,8 @@ namespace Gonzalez_LinkedListSearch
                     head = temp;
                     return temp;
                 }
-                if (current.MData.GetName().CompareTo(mdata.GetName()) < 0 && current.MData.GetName().CompareTo(mdata.GetName()) >= 0)
+                
+                if (current.MData.GetName().CompareTo(mdata.GetName()) < 0 && next.MData.GetName().CompareTo(mdata.GetName()) >= 0)
                 {
                     current.Next = new Node(mdata);
                     current.Next.Prev = current;
@@ -51,9 +62,10 @@ namespace Gonzalez_LinkedListSearch
                     next.Prev = current.Next;
                     return current.Next;
                 }
+                
                 current = current.Next;
             }
- 
+            
             return null;
         }
         public string Print()
@@ -75,7 +87,7 @@ namespace Gonzalez_LinkedListSearch
         public Node Search(string name)
         {
             // stopwatch to time Search function
-            //Search from back and front
+            
             Node current = head;
             
             while (current != null)
@@ -94,11 +106,11 @@ namespace Gonzalez_LinkedListSearch
             }
             return null;
         }
-        public Node PopSearch(char gender)
+        public Node MalePopSearch()
         {
             
             Node current = head;
-            Node last = tail;
+            
             while (current != null)
             {
                 Node Next = current.Next;
@@ -106,22 +118,46 @@ namespace Gonzalez_LinkedListSearch
                 {
                     return null;
                 }
-
+                if (Next == null) 
+                {
+                    return current;
+                }
                 if ((current.MData.GetGender() == 'M') && (current.MData.GetRank() > Next.MData.GetRank()))
                 {
                     return current;
                 }
-                else if ((last.MData.GetGender() != 'M') && (last.MData.GetRank() < last.Prev.MData.GetRank())) 
-                {
-                    
-                    return last;
-                }
-                last = tail.Prev;
                 current = current.Next;
             }
             
             return null;
         }
+        public Node FemalePopSearch()
+        {
+
+            Node current = head;
+
+            while (current != null)
+            {
+                Node Next = current.Next;
+                if (current == null)
+                {
+                    return null;
+                }
+                if (Next == null) 
+                {
+                    return current;
+                }
+                if ((current.MData.GetGender() == 'F') && (current.MData.GetRank() > Next.MData.GetRank()))
+                {
+                    return current;
+                }
+                current = current.Next;
+            }
+
+            return null;
+        }
+
+
 
     }
 }

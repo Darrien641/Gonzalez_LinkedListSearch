@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq.Expressions;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
 
 namespace Gonzalez_LinkedListSearch
@@ -11,16 +13,17 @@ namespace Gonzalez_LinkedListSearch
     {
         static void Main(string[] args)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            ArrayList menu = new ArrayList();
+            FileBoot fb = new FileBoot();
+            fb.getData();
+            LinkedList DLL = fb.getList();
+            MetaData TempMData;
+            Node tempNode;
             string Input = "";
             string Name = "";
             string Gender = "";
             string Rank = "";
-            FileBoot fb = new FileBoot();           
-            LinkedList DLL = fb.getList();
-            MetaData TempMData;
-            ArrayList menu = new ArrayList();
-            Node tempNode;
-            fb.getData();
             menu.Add("1. Search By Name");
             menu.Add("2. See Total Items in List");
             menu.Add("3. See Total Female List Items");
@@ -47,8 +50,11 @@ namespace Gonzalez_LinkedListSearch
                 {
                     Console.WriteLine("Search by name:");
                     Input = Console.ReadLine();
+                    stopwatch.Start();
                     tempNode = DLL.Search(Input);
-                    Console.WriteLine($"Search result: \n" +
+                    stopwatch.Stop();
+                    string time = stopwatch.ElapsedMilliseconds.ToString(@"m\:ss\.ff");
+                    Console.WriteLine($"Search result in {stopwatch.}: \n" +
                         $"Name: {tempNode.MData.GetName()}" +
                         $" Gender: {tempNode.MData.GetGender()}" +
                         $" Popularity: {tempNode.MData.GetRank()}");
@@ -68,18 +74,39 @@ namespace Gonzalez_LinkedListSearch
                 }
                 if (Input == "5")
                 {
+                    Input = "";
                     Console.WriteLine("Please enter the name you would like to add: ");
                     Name = Console.ReadLine();
                     Console.WriteLine($"Please enter the Gender of {Name}");
                     Gender = Console.ReadLine();
-                    Console.WriteLine($"Please Enter the Rank of{Name}");
+                    Console.WriteLine($"Please Enter the Rank of {Name}");
                     Rank = Console.ReadLine();
-                    TempMData = new MetaData(Convert.ToChar(Gender.ToUpper()), Name, Convert.ToInt32(Rank));
-                    DLL.Add(TempMData);
+
+                    if (DLL.Search(Name) != null)
+                    {
+                        Console.WriteLine($"{Name} of gender {Gender.ToUpper()} already exists Would you like to add a _1 or cancel? Add/Cancel");
+                        Input = Console.ReadLine();
+                        if (Input.ToLower() == "add")
+                        {
+                            Name += "_1";
+                            TempMData = new MetaData(Convert.ToChar(Gender.ToUpper()), Name, Convert.ToInt32(Rank));
+                            DLL.Add(TempMData);
+                            Console.WriteLine($"{Name} was added too the list");
+                        }
+                        else if(Input.ToLower() == "cancel")
+                        {
+                            continue;
+                        }
+                        else 
+                        {
+                            Console.WriteLine("Please choose a valid option.");
+                        }
+                    }
+                    
                 }
                 if (Input == "6")
                 {
-                    tempNode = DLL.PopSearch('M');
+                    tempNode = DLL.MalePopSearch();
                     Console.WriteLine($"Search result: \n" +
                         $"Name: {tempNode.MData.GetName()}" +
                         $" Gender: {tempNode.MData.GetGender()}" +
@@ -87,7 +114,7 @@ namespace Gonzalez_LinkedListSearch
                 }
                 if (Input == "7")
                 {
-                    tempNode = DLL.PopSearch('F');
+                    tempNode = DLL.FemalePopSearch();
                     Console.WriteLine($"Search result: \n" +
                         $"Name: {tempNode.MData.GetName()}" +
                         $" Gender: {tempNode.MData.GetGender()}" +
