@@ -90,7 +90,7 @@ namespace Gonzalez_LinkedListSearch
                     {
                         Console.WriteLine($"{Name} of gender {Gender.ToUpper()} already exists Would you like to add a _1 or cancel? Add/Cancel");
                         Input = Console.ReadLine();
-                        if (Input.ToLower() == "add")
+                        if (Input.ToLower() == "add" && DLL.Search(Name).MData.GetGender().ToString().ToUpper() == Gender.ToUpper())
                         {
                             Name += "_1";
                             TempMData = new MetaData(Convert.ToChar(Gender.ToUpper()), Name, Convert.ToInt32(Rank));
@@ -126,41 +126,9 @@ namespace Gonzalez_LinkedListSearch
                 }
                 if (Input == "8")
                 {
-                   Console.WriteLine(DLL.Print());
-                }
-                //break;
+                    Console.WriteLine("Goodbye!");
+                }     
             }
-            //MetaData mdata = new MetaData('M', "Mark",500);
-
-
-            //try
-            //{
-            //    Console.WriteLine(fb.getData());
-            //    DLL.Add(mdata);
-            //    Console.WriteLine(DLL.Print());
-            //    Console.WriteLine("User was added");
-            //}
-            //catch
-            //{
-
-            //    Console.WriteLine("user could not be added");
-            //}
-
-            //try
-            //{
-
-            //    tempnode = DLL.Search("liam");
-            //    temp2 = DLL.PopSearch();
-            //    Console.WriteLine($"{tempnode.MData.GetName()}, was found in the list");
-            //    Console.WriteLine($"{temp2.MData.GetName()}, is the most popular in the list with a rank of {temp2.MData.GetRank()}");
-            //}
-            //catch 
-            //{
-            //    Console.WriteLine("User was not found");
-            //}
-            //Console.WriteLine($"Total Nodes: {MetaData.GetTotalNodes()}\n" +
-            //    $"Total Females in list: {MetaData.GetTotalFemales()}\n" +
-            //    $"Total Males in list: {MetaData.GetTotalMales()}");
         }
     }
 }

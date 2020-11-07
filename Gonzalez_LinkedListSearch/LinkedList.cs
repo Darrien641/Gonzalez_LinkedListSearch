@@ -8,8 +8,8 @@ namespace Gonzalez_LinkedListSearch
 {
     class LinkedList
     {
-        Node head;
-        Node tail;
+        private Node head;
+        private Node tail;
        
 
         public Node Add(MetaData mdata)
